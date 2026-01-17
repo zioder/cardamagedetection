@@ -277,9 +277,10 @@ function detectAIGeneration(
 
   // Require at least 2 detection methods for high confidence AI detection
   // Or 1 method with very high confidence (metadata signatures)
-  const isLikelyAI = (methodCount >= 2 && adjustedConfidence >= 55) || 
+  const isLikelyAI: boolean = (methodCount >= 2 && adjustedConfidence >= 55) || 
                      (methodCount >= 3 && adjustedConfidence >= 45) ||
-                     (metadata.aiSignatures && metadata.aiSignatures.length > 0 && adjustedConfidence >= 70);
+                     (metadata.aiSignatures && metadata.aiSignatures.length > 0 && adjustedConfidence >= 70) ||
+                     false;
 
   return {
     isLikelyAI,
