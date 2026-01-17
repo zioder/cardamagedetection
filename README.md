@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AutoScan AI - Car Damage Detection & Analysis
 
-## Getting Started
+A Next.js web application that uses AI to detect car damage, estimate repair costs, and generate a preview of the repaired vehicle.
 
-First, run the development server:
+## Features
+
+- 🚗 **Damage Detection**: Uses Roboflow API to identify damaged areas
+- 💰 **Cost Estimation**: Gemini AI analyzes damage and estimates repair costs in multiple currencies
+- 🎨 **Repair Preview**: Generates an AI image showing the car after repairs
+- 🌙 **Premium Dark UI**: Modern, cyberpunk-inspired design with glassmorphism
+
+## Setup
+
+### 1. Install Dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure API Keys
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env.local` file in the root directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+ROBOFLOW_API_KEY=your_roboflow_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
+```
 
-## Learn More
+**Get API Keys:**
+- **Roboflow**: Sign up at [roboflow.com](https://roboflow.com)
+- **Gemini**: Get your key from [Google AI Studio](https://makersuite.google.com/app/apikey)
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Run Development Server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Upload Image**: Drag and drop or click to upload a photo of a damaged car
+2. **Select Currency**: Choose your preferred currency for cost estimation
+3. **Analyze**: Click "Analyze Damage" to start the AI workflow
+4. **View Results**:
+   - Damage detection with bounding boxes
+   - Car model identification
+   - Detailed cost breakdown (parts + labor)
+   - AI-generated repair preview
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tech Stack
+
+- **Framework**: Next.js 16 with App Router
+- **Styling**: Tailwind CSS 4
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **APIs**:
+  - Roboflow (Damage Detection)
+  - Google Gemini (Analysis & Image Generation)
+
+## Project Structure
+
+```
+cardamagedetection/
+├── app/
+│   ├── api/
+│   │   ├── detect/route.ts      # Roboflow damage detection
+│   │   ├── analyze/route.ts     # Gemini cost analysis
+│   │   └── generate/route.ts    # Gemini image generation
+│   ├── page.tsx                 # Main UI
+│   ├── layout.tsx
+│   └── globals.css
+├── components/
+│   ├── Navbar.tsx
+│   ├── UploadZone.tsx
+│   └── AnalysisCard.tsx
+└── lib/
+    └── utils.ts
+```
+
+## License
+
+MIT
