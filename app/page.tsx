@@ -737,7 +737,6 @@ export default function Home() {
                   <AnalysisCard
                     analysis={analysis}
                     currencySymbol={currencySymbol}
-                    sources={sources}
                   />
                 </div>
               )}

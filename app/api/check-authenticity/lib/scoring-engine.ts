@@ -30,7 +30,7 @@ export function scoreResults(
 
   // Calculate comprehensive risk score
   const riskScore = calculateRiskScore(metadata, forensics);
-  
+
   // Determine AI detection status
   const aiDetection = detectAIGeneration(metadata, forensics);
 
@@ -170,7 +170,7 @@ function calculateRiskScore(
   }
 
   // POSITIVE FACTORS (reduce risk)
-  
+
   // Authentic camera signatures reduce risk significantly
   if (metadata.hasEXIF) {
     score -= 15;
@@ -190,9 +190,9 @@ function calculateRiskScore(
   }
 
   // Low ELA variance with no hotspots is good
-  if (forensics.elaAnalysis && 
-      !forensics.elaAnalysis.hasManipulation && 
-      forensics.elaAnalysis.variance < 10) {
+  if (forensics.elaAnalysis &&
+    !forensics.elaAnalysis.hasManipulation &&
+    forensics.elaAnalysis.variance < 10) {
     score -= 10;
   }
 
@@ -270,17 +270,17 @@ function detectAIGeneration(
 
   // Calculate weighted confidence
   const confidence = methodCount > 0 ? totalScore / methodCount : 0;
-  
+
   // Multiple detection methods increase confidence
   const multiplier = 1 + (Math.min(methodCount, 5) * 0.08);
   const adjustedConfidence = Math.min(100, confidence * multiplier);
 
   // Require at least 2 detection methods for high confidence AI detection
   // Or 1 method with very high confidence (metadata signatures)
-  const isLikelyAI: boolean = (methodCount >= 2 && adjustedConfidence >= 55) || 
-                     (methodCount >= 3 && adjustedConfidence >= 45) ||
-                     (metadata.aiSignatures && metadata.aiSignatures.length > 0 && adjustedConfidence >= 70) ||
-                     false;
+  const isLikelyAI: boolean = (methodCount >= 2 && adjustedConfidence >= 55) ||
+    (methodCount >= 3 && adjustedConfidence >= 45) ||
+    (metadata.aiSignatures && metadata.aiSignatures.length > 0 && adjustedConfidence >= 70) ||
+    false;
 
   return {
     isLikelyAI,
@@ -368,7 +368,7 @@ function generateRecommendation(
 
   // VERIFIED
   const positiveFactors: string[] = [];
-  
+
   if (metadata.hasEXIF) positiveFactors.push('valid camera metadata');
   if (metadata.hasGPS) positiveFactors.push('GPS location verified');
   if (metadata.cameraInfo?.make && metadata.cameraInfo?.model) {
