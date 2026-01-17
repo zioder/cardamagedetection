@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Car Damage Detection & Analysis",
   description: "AI-powered car damage detection, cost estimation, and repair preview",
+  icons: {
+    icon: "/PS.svg",
+  },
 };
 
 import ServiceWorkerCleaner from "../components/ServiceWorkerCleaner";
